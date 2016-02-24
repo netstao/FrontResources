@@ -1,0 +1,71 @@
+
+
+http://www.zentao.net/book/zentaopmshelp/137.html   集成禅道和svn
+
+
+
+http://www.zentao.net/book/zentaopmshelp/35.html   初始化管理脚本
+
+
+
+#日志解析xml 提交到数据库 zt_action 
+/usr/bin/svn log  -r 5090:HEAD -v --xml svn://127.0.0.1/test
+
+<?xml version="1.0"?>
+<log>
+	<logentry
+	   revision="5090">
+	<author>zhouchao</author>
+	<date>2016-01-07T02:49:25.263547Z</date>
+	<paths>
+	<path
+	   kind="file"
+	   action="M">/test/src/test/java/com/yogapay/boss/Test.java</path>
+	</paths>
+	<msg>task#303 svn 集成test</msg>
+	</logentry>
+	<logentry
+	   revision="5092">
+	<author>zhouchao</author>
+	<date>2016-01-07T03:23:19.632525Z</date>
+	<paths>
+	<path
+	   kind="file"
+	   action="M">/test/src/test/java/com/yogapay/boss/Test.java</path>
+	</paths>
+	<msg>bug#807 svn bug提交测试</msg>
+	</logentry>
+	<logentry
+	   revision="5100">
+	<author>zhouchao</author>
+	<date>2016-01-07T03:58:55.361695Z</date>
+	<paths>
+	<path
+	   kind="file"
+	   action="M">/test/src/test/java/com/yogapay/boss/Test.java</path>
+	</paths>
+	<msg>bug#807 svn bug提交测试</msg>
+	</logentry>
+	<logentry
+	   revision="5103">
+	<author>zhouchao</author>
+	<date>2016-01-07T06:35:51.922622Z</date>
+	<paths>
+	<path
+	   kind="file"
+	   action="M">/test/src/test/java/com/yogapay/boss/Test.java</path>
+	</paths>
+	<msg>bug#807 svn bug task提交测试</msg>
+	</logentry>
+</log>
+
+#svn 客服端版本比较
+/usr/bin/svn  diff -r5089:5090 svn://127.0.0.1/test/src/test/java/com/yogapay/boss/Test.java@5090
+
+
+
+
+
+
+
+
