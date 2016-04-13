@@ -35,6 +35,8 @@ echo "    ssl_certificate_key /etc/nginx/ssl/$DOMAIN.key;"
 echo "}"
 
 
-#µ¥¶ÀÃüÁî
-#openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout server.key -out server.crt
+#å•ç‹¬å‘½ä»¤
+#openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout ssl.key -out ssl.crt
+
+https://www.shuzizhengshu.com/html/zixun/hydt/item-21.html
 
