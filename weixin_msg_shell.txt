@@ -1,0 +1,7 @@
+#!/bin/bash
+kill -USR2  `cat /usr/local/webserver/php/var/run/php-fpm.pid`  \ && 
+cd  /home/www/weixin.express01.com/weixin  \   &&
+ps aux | grep server.php  |  grep -v php-fpm | grep -v grep | awk '{print $2}'| xargs kill -9    \ && 
+ps aux | grep msg_to_mysql_daemon  |  grep -v php-fpm | grep -v grep | awk '{print $2}'| xargs kill -USR2  \ && 
+ps aux | grep  post_daemon  |  grep -v php-fpm | grep -v grep | awk '{print $2}'| xargs kill -USR2   　　 \ && 
+php server.php  && php msg_to_mysql_daemon.php  && php post_daemon.php
