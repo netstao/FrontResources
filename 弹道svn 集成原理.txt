@@ -62,6 +62,47 @@ http://www.zentao.net/book/zentaopmshelp/35.html   初始化管理脚本
 #svn 客服端版本比较
 /usr/bin/svn  diff -r5089:5090 svn://127.0.0.1/test/src/test/java/com/yogapay/boss/Test.java@5090
 
+#svn hook  post-commit
+export LANG="zh_CN.UTF-8"
+/home/deploy/zentaopms/bin/syncsvn.sh  #禅道注释入库
+REPOS="$!"
+SVNLOOK=/usr/bin/svnlook
+CHANGEDDIRS=$($SVNLOOK dirs-changed /opt/svn/repository)
+MASTERDIR=$(echo "$CHANGEDDIRS" | head -1)
+
+PROJECT=$(echo $MASTERDIR | awk -F / '{print $1}')
+
+ if [ "$PROJECT" == "www.express01.com" ];then
+        /usr/bin/svn update --username svncheckout --password svncheckout321 /data/www/www.express01.com/
+ fi
+
+ if [ "$PROJECT" == "www.kuaidiwangzi.com" ];then
+        /usr/bin/svn update --username svncheckout --password svncheckout321 /data/www/www.kuaidiwangzi.com/
+ fi
+
+ if [ "$PROJECT" == "www.yogapay.com" ];then
+        /usr/bin/svn update --username svncheckout --password svncheckout321 /data/www/www.yogapay.com/prod/www.yogapay.com/
+ fi
+
+ 
+ #svn hook 提交前的检查 pre-commint
+REPOS="$1"
+TXN="$2"
+# Make sure that the log message contains some text.
+SVNLOOK=/usr/bin/svnlook
+LOGMSG=`$SVNLOOK log -t "$TXN" "$REPOS" | grep "[a-zA-Z0-9]" | wc -c`
+echo $LOGMSG
+if [ "$LOGMSG" -lt 5 ];
+then
+   echo -e "开发者在提交svn的时候(直接复制禅道上的任务标题)，需要在备注里面注明此次修改相关的需求，或者任务，或者bug的id。比如下面的格式： " 1>&2
+   echo -e "bug#123,234, 1234，也可以是bug:123,234 1234，id列表之间，用逗号和空格都可以。" 1>&2
+   echo -e "story#123 task#123" 1>&2
+   echo -e "bug, story, task是必须标注的。:) " 1>&2
+   exit 1
+fi
+
+exit 0
+
 
 
 
